@@ -4,6 +4,7 @@ import React, { useState } from "react";
 export function Home() {
 	const [todo, setTodo] = useState("");
 	const [todoList, setTodoList] = useState([]);
+	const [trash, setTrash] = useState(false);
 	let showArray = [];
 
 	const updateTodo = e => {
@@ -15,10 +16,12 @@ export function Home() {
 		setTodo("");
 	};
 
-	const deleteTodo = index => {
-		todoList.splice(index, 1);
-		addTodo();
-	};
+	function deleteTodo(arr, item) {
+		const result = arr.filter((todoList, index) => {
+			return index != item;
+		});
+		setTodoList(result);
+	}
 
 	return (
 		<div
@@ -31,13 +34,24 @@ export function Home() {
 			<button className="btn btn-light" onClick={addTodo}>
 				Add
 			</button>
-			<button className="btn btn-light" onClick={deleteTodo}>
-				Delete
-			</button>
 			{todoList.map((item, index) => (
-				<p key={index} className="border">
-					{item}
-				</p>
+				<div
+					key={index}
+					className="borderDown"
+					onMouseEnter={() => setTrash(!trash)}
+					onMouseLeave={() => setTrash(!trash)}
+					onClick={() => deleteTodo(todoList, index)}>
+					<div className="d-flex justify-content-start col">
+						{item}
+					</div>
+					<div className="d-flex justify-content-end col">
+						{!trash === false ? (
+							<i className="fas fa-trash-alt"></i>
+						) : (
+							""
+						)}
+					</div>
+				</div>
 			))}
 		</div>
 	);
