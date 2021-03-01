@@ -46,7 +46,7 @@ export function Home() {
 					</div>
 					<div className="d-flex justify-content-end col">
 						{!trash === false ? (
-							<i className="fas fa-trash-alt"></i>
+							<i className="fas fa-trash"></i>
 						) : (
 							""
 						)}
