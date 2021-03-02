@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 //create your first component
 export function Home() {
@@ -22,6 +22,16 @@ export function Home() {
 		});
 		setTodoList(result);
 	}
+
+	const getTodos = () => {
+		fetch("https://assets.breatheco.de/apis/fake/todos/user/heidysnj")
+			.then(response => response.json())
+			.then(res => setTodoList(res));
+	};
+	useEffect(() => {
+		getTodos();
+	}, []);
+	console.log(todoList);
 
 	return (
 		<div
