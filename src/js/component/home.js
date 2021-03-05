@@ -23,16 +23,6 @@ export function Home() {
 		setTodoList(result);
 	}
 
-	const getTodos = () => {
-		fetch("https://assets.breatheco.de/apis/fake/todos/user/heidysnj")
-			.then(response => response.json())
-			.then(res => setTodoList(res));
-	};
-	useEffect(() => {
-		getTodos();
-	}, []);
-	console.log(todoList);
-
 	return (
 		<div
 			className="text-center mt-5"
@@ -51,10 +41,10 @@ export function Home() {
 					onMouseEnter={() => setTrash(!trash)}
 					onMouseLeave={() => setTrash(!trash)}
 					onClick={() => deleteTodo(todoList, index)}>
-					<div className="d-flex justify-content-start col">
+					<div className="rowList d-flex justify-content-start col">
 						{item}
 					</div>
-					<div className="d-flex justify-content-end col">
+					<div className="rowList d-flex justify-content-end col">
 						{!trash === false ? (
 							<i className="fas fa-trash"></i>
 						) : (
